@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import {AuthContextType} from '../types/auth';
 
-// ...existing code...
+const API_BASE_URL = 'http://localhost:5000/api';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -9,25 +9,59 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<{ email: string } | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const signUp = async (email: string, password: string) => {
+  // Check for existing token on app load
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      verifyToken(token);
+    }
+  }, []);
+
+  const verifyToken = async (token: string) => {
     setLoading(true);
     try {
-      // Mock authentication - store user in localStorage
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const response = await fetch(`${API_BASE_URL}/verify`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
       
-      // Check if user already exists
-      if (users.find((u: any) => u.email === email)) {
-        return { data: null, error: { message: 'User already exists' } };
+      if (response.ok) {
+        const result = await response.json();
+        setUser(result.data.user);
+      } else {
+        localStorage.removeItem('authToken');
       }
+    } catch (error) {
+      console.error('Token verification failed:', error);
+      localStorage.removeItem('authToken');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signUp = async (email: string, password: string, confirmPassword?: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password, confirmPassword })
+      });
       
-      // Add new user
-      users.push({ email, password });
-      localStorage.setItem('users', JSON.stringify(users));
+      const result = await response.json();
       
-      setUser({ email });
-      return { data: { user: { email } }, error: null };
+      if (response.ok) {
+        // Don't auto-login after signup - user must sign in manually
+        return { data: { user: result.data.user }, error: null };
+      } else {
+        return { data: null, error: { message: result.error } };
+      }
     } catch (error: any) {
-      return { data: null, error };
+      return { data: null, error: { message: 'Network error. Please check if the server is running.' } };
     } finally {
       setLoading(false);
     }
@@ -36,18 +70,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signIn = async (email: string, password: string) => {
     setLoading(true);
     try {
-      // Mock authentication - check against localStorage
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find((u: any) => u.email === email && u.password === password);
+      const response = await fetch(`${API_BASE_URL}/signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
       
-      if (user) {
-        setUser({ email });
-        return { data: { user: { email } }, error: null };
+      const result = await response.json();
+      
+      if (response.ok) {
+        setUser(result.data.user);
+        localStorage.setItem('authToken', result.data.token);
+        return { data: result.data, error: null };
       } else {
-        return { data: null, error: { message: 'Invalid email or password' } };
+        return { data: null, error: { message: result.error } };
       }
     } catch (error: any) {
-      return { data: null, error };
+      return { data: null, error: { message: 'Network error. Please check if the server is running.' } };
     } finally {
       setLoading(false);
     }
@@ -55,6 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     setUser(null);
+    localStorage.removeItem('authToken');
   };
 
   const value: AuthContextType = {
