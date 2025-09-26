@@ -9,111 +9,190 @@ import {
   BookOpen,
   Shield,
   AlertTriangle,
-  Key,
-  Smartphone
+  Key
 } from 'lucide-react';
 
 export default function LearningPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const videoTutorials = [
+    // Cybersecurity (Basics + Advanced)
     {
       id: 1,
-      title: 'Understanding Phishing Attacks',
-      description: 'Learn to identify and protect yourself from phishing scams',
-      duration: '12:30',
-      views: '50K',
+      title: 'Cyber Security Full Course for Beginners | Edureka',
+      description: 'Complete cybersecurity fundamentals from basics to advanced concepts',
+      duration: '8:30:00',
+      views: '2.1M',
       rating: 4.8,
-      category: 'threats',
-      thumbnail: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=400',
+      category: 'cybersecurity',
+      url: 'https://www.youtube.com/watch?v=hXSFdwIOfnE',
       level: 'Beginner'
     },
     {
       id: 2,
-      title: 'Password Security Best Practices',
-      description: 'Create strong passwords and use password managers effectively',
-      duration: '8:45',
-      views: '75K',
-      rating: 4.9,
-      category: 'passwords',
-      thumbnail: 'https://images.pexels.com/photos/1591061/pexels-photo-1591061.jpeg?auto=compress&cs=tinysrgb&w=400',
+      title: 'Cybersecurity Training for Beginners | Simplilearn',
+      description: 'Essential cybersecurity training for newcomers to the field',
+      duration: '6:45:00',
+      views: '1.8M',
+      rating: 4.7,
+      category: 'cybersecurity',
+      url: 'https://www.youtube.com/watch?v=rcDO8km6R6c',
       level: 'Beginner'
     },
     {
       id: 3,
-      title: 'Mobile Security Essentials',
-      description: 'Secure your smartphone from malware and data breaches',
-      duration: '15:20',
-      views: '42K',
-      rating: 4.7,
-      category: 'mobile',
-      thumbnail: 'https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&w=400',
-      level: 'Intermediate'
+      title: 'Cyber Security Crash Course',
+      description: 'Quick introduction to cybersecurity concepts and practices',
+      duration: '2:15:00',
+      views: '950K',
+      rating: 4.6,
+      category: 'cybersecurity',
+      url: 'https://www.youtube.com/watch?v=U_P23SqJaDc',
+      level: 'Beginner'
     },
     {
       id: 4,
-      title: 'Two-Factor Authentication Setup',
-      description: 'Step-by-step guide to enable 2FA on popular platforms',
-      duration: '10:15',
-      views: '38K',
-      rating: 4.6,
-      category: 'passwords',
-      thumbnail: 'https://images.pexels.com/photos/1591062/pexels-photo-1591062.jpeg?auto=compress&cs=tinysrgb&w=400',
+      title: 'Introduction to Cybersecurity | Cisco',
+      description: 'Official Cisco introduction to cybersecurity fundamentals',
+      duration: '4:20:00',
+      views: '1.2M',
+      rating: 4.9,
+      category: 'cybersecurity',
+      url: 'https://www.youtube.com/watch?v=inWWhr5tnEA',
       level: 'Beginner'
     },
     {
       id: 5,
-      title: 'Ransomware Protection Strategies',
-      description: 'Comprehensive guide to prevent and respond to ransomware',
-      duration: '18:30',
-      views: '29K',
+      title: 'Cybersecurity Roadmap 2024 (Step by Step Guide)',
+      description: 'Complete roadmap for cybersecurity career in 2024',
+      duration: '45:30',
+      views: '680K',
       rating: 4.8,
-      category: 'threats',
-      thumbnail: 'https://images.pexels.com/photos/2882552/pexels-photo-2882552.jpeg?auto=compress&cs=tinysrgb&w=400',
-      level: 'Advanced'
+      category: 'cybersecurity',
+      url: 'https://www.youtube.com/watch?v=HmId9LLyLws',
+      level: 'Intermediate'
     },
+    
+    // Networking Courses
     {
       id: 6,
-      title: 'Social Media Privacy Settings',
-      description: 'Protect your privacy on Facebook, Instagram, and Twitter',
-      duration: '14:20',
-      views: '56K',
-      rating: 4.5,
-      category: 'privacy',
-      thumbnail: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=400',
+      title: 'Computer Networking Full Course | Cisco & Packet Tracer',
+      description: 'Complete networking course with Cisco Packet Tracer hands-on',
+      duration: '12:00:00',
+      views: '3.2M',
+      rating: 4.9,
+      category: 'networking',
+      url: 'https://www.youtube.com/watch?v=qiQR5rTSshw',
       level: 'Beginner'
     },
     {
       id: 7,
-      title: 'Email Security and Encryption',
-      description: 'Secure your email communications with encryption',
-      duration: '16:45',
-      views: '33K',
-      rating: 4.7,
-      category: 'privacy',
-      thumbnail: 'https://images.pexels.com/photos/1591056/pexels-photo-1591056.jpeg?auto=compress&cs=tinysrgb&w=400',
-      level: 'Advanced'
+      title: 'Computer Networking Course – Network Engineering',
+      description: 'Comprehensive network engineering concepts and implementation',
+      duration: '9:30:00',
+      views: '2.5M',
+      rating: 4.8,
+      category: 'networking',
+      url: 'https://www.youtube.com/watch?v=rL8RSFQG8do',
+      level: 'Intermediate'
     },
     {
       id: 8,
-      title: 'Safe Online Banking Practices',
-      description: 'Protect your finances while banking online',
-      duration: '11:30',
-      views: '67K',
-      rating: 4.9,
-      category: 'financial',
-      thumbnail: 'https://images.pexels.com/photos/4968631/pexels-photo-4968631.jpeg?auto=compress&cs=tinysrgb&w=400',
+      title: 'Computer Networking Basics | Simplilearn',
+      description: 'Fundamental networking concepts explained simply',
+      duration: '3:45:00',
+      views: '1.1M',
+      rating: 4.6,
+      category: 'networking',
+      url: 'https://www.youtube.com/watch?v=DrI2lUXL1no',
       level: 'Beginner'
+    },
+    {
+      id: 9,
+      title: 'CCNA Full Course (Beginner to Advanced)',
+      description: 'Complete CCNA certification preparation course',
+      duration: '15:00:00',
+      views: '1.8M',
+      rating: 4.9,
+      category: 'networking',
+      url: 'https://www.youtube.com/watch?v=rv3QK2UquxM',
+      level: 'Advanced'
+    },
+    {
+      id: 10,
+      title: 'OSI Model Explained',
+      description: 'Detailed explanation of the OSI 7-layer model',
+      duration: '25:15',
+      views: '890K',
+      rating: 4.7,
+      category: 'networking',
+      url: 'https://www.youtube.com/watch?v=vv4y_uOneC0',
+      level: 'Beginner'
+    },
+
+    // Ethical Hacking
+    {
+      id: 11,
+      title: 'Ethical Hacking Full Course for Beginners | Simplilearn',
+      description: 'Complete ethical hacking course from basics to advanced techniques',
+      duration: '10:30:00',
+      views: '2.8M',
+      rating: 4.8,
+      category: 'ethical-hacking',
+      url: 'https://www.youtube.com/watch?v=fNzpcB7ODxQ',
+      level: 'Beginner'
+    },
+    {
+      id: 12,
+      title: 'Ethical Hacking Tutorial for Beginners | Edureka',
+      description: 'Step-by-step ethical hacking tutorial for newcomers',
+      duration: '8:15:00',
+      views: '1.9M',
+      rating: 4.7,
+      category: 'ethical-hacking',
+      url: 'https://www.youtube.com/watch?v=WnN6dbos5u8',
+      level: 'Beginner'
+    },
+    {
+      id: 13,
+      title: 'Complete Ethical Hacking Course | FreeCodeCamp',
+      description: 'Comprehensive ethical hacking course by FreeCodeCamp',
+      duration: '15:45:00',
+      views: '3.5M',
+      rating: 4.9,
+      category: 'ethical-hacking',
+      url: 'https://www.youtube.com/watch?v=3Kq1MIfTWCE',
+      level: 'Intermediate'
+    },
+    {
+      id: 14,
+      title: 'CEH (Certified Ethical Hacker) Full Course',
+      description: 'Complete CEH certification preparation course',
+      duration: '12:20:00',
+      views: '1.6M',
+      rating: 4.8,
+      category: 'ethical-hacking',
+      url: 'https://www.youtube.com/watch?v=MacVkjV5OvI',
+      level: 'Advanced'
+    },
+    {
+      id: 15,
+      title: 'Kali Linux Ethical Hacking Tutorial',
+      description: 'Learn ethical hacking using Kali Linux tools and techniques',
+      duration: '6:30:00',
+      views: '2.2M',
+      rating: 4.7,
+      category: 'ethical-hacking',
+      url: 'https://www.youtube.com/watch?v=lZAoFs75_cs',
+      level: 'Intermediate'
     }
   ];
 
   const categories = [
-    { id: 'all', label: 'All Videos', icon: GraduationCap },
-    { id: 'threats', label: 'Cyber Threats', icon: AlertTriangle },
-    { id: 'passwords', label: 'Password Security', icon: Key },
-    { id: 'mobile', label: 'Mobile Security', icon: Smartphone },
-    { id: 'privacy', label: 'Privacy Protection', icon: Shield },
-    { id: 'financial', label: 'Financial Security', icon: BookOpen }
+    { id: 'all', name: 'All Courses', icon: BookOpen },
+    { id: 'cybersecurity', name: 'Cybersecurity', icon: Shield },
+    { id: 'networking', name: 'Networking', icon: AlertTriangle },
+    { id: 'ethical-hacking', name: 'Ethical Hacking', icon: Key }
   ];
 
   const learningPaths = [
@@ -243,7 +322,7 @@ export default function LearningPage() {
                 }`}
               >
                 <category.icon className="h-4 w-4" />
-                <span>{category.label}</span>
+                <span>{category.name}</span>
               </button>
             ))}
           </div>
@@ -257,19 +336,16 @@ export default function LearningPage() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="cyber-card p-0 rounded-xl overflow-hidden group hover:scale-105 transition-transform"
+              className="cyber-card p-0 rounded-xl overflow-hidden group hover:scale-105 transition-transform cursor-pointer"
+              onClick={() => window.open(video.url, '_blank')}
             >
-              {/* Thumbnail */}
-              <div className="relative">
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                  <div className="bg-red-600 rounded-full p-3 group-hover:scale-110 transition-transform">
-                    <Play className="h-6 w-6 text-white ml-1" />
+              {/* Video Preview */}
+              <div className="relative bg-gradient-to-br from-gray-800 to-gray-900 h-48 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="bg-red-600 rounded-full p-4 group-hover:scale-110 transition-transform mb-4">
+                    <Play className="h-8 w-8 text-white ml-1" />
                   </div>
+                  <div className="text-white text-sm font-medium">Click to Watch on YouTube</div>
                 </div>
                 <div className="absolute top-4 right-4 bg-black/80 px-2 py-1 rounded text-white text-xs flex items-center space-x-1">
                   <Clock className="h-3 w-3" />
