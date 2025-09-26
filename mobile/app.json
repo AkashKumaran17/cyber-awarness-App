@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "Cyber Awareness Mobile",
+    "slug": "cyber-awareness-mobile",
+    "scheme": "cyberawareness",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "ios": {"supportsTablet": true},
+    "android": {},
+    "web": {"bundler": "metro", "output": "static"}
+  }
+}
