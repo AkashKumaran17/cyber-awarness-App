@@ -18,22 +18,18 @@ import ThreatDetailPage from './pages/ThreatDetailPage';
 
 function ProtectedApp() {
   const { user, loading } = useAuth();
+  
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900">
-        <span className="text-white text-2xl">Loading...</span>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+          <span className="text-white text-xl">Loading Cybersecurity App...</span>
+        </div>
       </div>
     );
   }
-  if (!user) {
-    return (
-      <Router>
-        <Routes>
-          <Route path="/*" element={<AuthPage />} />
-        </Routes>
-      </Router>
-    );
-  }
+
   return (
     <Router>
       <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900">
@@ -41,15 +37,22 @@ function ProtectedApp() {
           <Navbar />
           <main className="pt-16">
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              {/* Root route - show login page if not authenticated, home page if authenticated */}
+              <Route path="/" element={user ? <HomePage /> : <AuthPage />} />
+              
+              {/* Public routes - accessible without authentication */}
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/home" element={user ? <HomePage /> : <AuthPage />} />
               <Route path="/threats" element={<ThreatsPage />} />
               <Route path="/threats/:id" element={<ThreatDetailPage />} />
-              <Route path="/cyber-laws" element={<CyberLawsPage />} />
-              <Route path="/password-checker" element={<PasswordCheckerPage />} />
               <Route path="/malware" element={<MalwarePage />} />
-              <Route path="/incidents" element={<IncidentsPage />} />
               <Route path="/emergency" element={<EmergencyPage />} />
               <Route path="/learning" element={<LearningPage />} />
+              <Route path="/password-checker" element={<PasswordCheckerPage />} />
+              
+              {/* Protected routes - require authentication for full access */}
+              <Route path="/cyber-laws" element={user ? <CyberLawsPage /> : <AuthPage />} />
+              <Route path="/incidents" element={user ? <IncidentsPage /> : <AuthPage />} />
             </Routes>
           </main>
           <Footer />
