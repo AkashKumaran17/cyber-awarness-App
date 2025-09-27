@@ -16,6 +16,11 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+// API proxy to backend (if needed)
+app.use('/api', (req, res) => {
+  res.status(503).json({ error: 'Backend API not available in static deployment' });
+});
+
 // Handle React Router - send all requests to index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
@@ -23,5 +28,5 @@ app.get('*', (req, res) => {
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Cybersecurity Awareness App is running on http://0.0.0.0:${port}`);
-  console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`📱 Environment: ${process.env.NODE_ENV || 'production'}`);
 });
