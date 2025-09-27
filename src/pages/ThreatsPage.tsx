@@ -8,13 +8,54 @@ import {
   Smartphone, 
   Database,
   Search,
-  ArrowRight
+  ArrowRight,
+  Mail
 } from 'lucide-react';
 
 export default function ThreatsPage() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const threats = [
+    {
+      id: 'phishing',
+      title: 'Phishing',
+      icon: Mail,
+      severity: 'High Risk',
+      description: 'Phishing tricks users into revealing credentials, personal data, or installing malware by pretending to be a trusted party.',
+      examples: [
+        'Fake bank/email provider login pages that steal usernames/passwords',
+        'Spear-phishing targeting an individual (e.g., CFO) with a tailored message asking for wire transfers',
+        'Business Email Compromise (BEC): attacker spoofs or hijacks an executive\'s email to request invoice payments',
+        'Smishing/Vishing: malicious SMS or voice calls asking for OTPs or account details',
+        'Malicious attachments (invoice.doc with macro) that install remote access trojans'
+      ],
+      howItWorks: [
+        'Attacker crafts a convincing message (email, SMS, social media) that appears legitimate',
+        'Victim clicks a link or opens an attachment that leads to a fake login page or installs malware',
+        'Victim submits credentials or the malware captures keystrokes, cookies, or other sensitive data',
+        'Attacker uses stolen credentials to access accounts, move laterally, commit fraud, or exfiltrate data'
+      ],
+      protection: [
+        'Enable Multi-Factor Authentication (MFA) everywhere possible',
+        'Use email security: SPF, DKIM, DMARC, and advanced email filters (ATP/secure email gateways)',
+        'Deploy browser and endpoint protections that detect fake sites and block malicious downloads',
+        'Implement strong link/attachment sandboxing and URL rewriting in email gateways',
+        'Enforce least-privilege access and use conditional access policies'
+      ],
+      prevention: [
+        'Conduct periodic phishing awareness training and simulated phishing exercises',
+        'Keep software and browsers patched; disable risky features (e.g., macros by default)',
+        'Maintain an incident response playbook for compromised credentials and BEC attempts',
+        'Monitor authentication logs for unusual logins, impossible travel, and brute-force attempts',
+        'Require out-of-band verification for high-value financial requests (call the requester on a known number)'
+      ],
+      realWorldCases: [
+        'RSA SecurID Breach (2011) — Attackers used a targeted phishing email to compromise an RSA employee; stolen information weakened SecurID two-factor security for some customers',
+        'Target Supply-Chain Phishing (2013) — Attackers phished credentials from an HVAC vendor, then used those credentials to access Target\'s network and exfiltrate customer payment data',
+        'Sony Pictures (2014) — Spear-phishing and social engineering helped attackers gain footholds that led to a destructive breach and large data leak'
+      ],
+      color: 'red'
+    },
     {
       id: 'malware',
       title: 'Malware',

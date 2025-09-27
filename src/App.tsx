@@ -49,10 +49,8 @@ function ProtectedApp() {
               <Route path="/emergency" element={<EmergencyPage />} />
               <Route path="/learning" element={<LearningPage />} />
               <Route path="/password-checker" element={<PasswordCheckerPage />} />
-              
-              {/* Protected routes - require authentication for full access */}
-              <Route path="/cyber-laws" element={user ? <CyberLawsPage /> : <AuthPage />} />
-              <Route path="/incidents" element={user ? <IncidentsPage /> : <AuthPage />} />
+              <Route path="/cyber-laws" element={<CyberLawsPage />} />
+              <Route path="/incidents" element={<IncidentsPage />} />
             </Routes>
           </main>
           <Footer />
